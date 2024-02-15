@@ -23,18 +23,22 @@ public class Login
 			     driver=new ChromeDriver();  
 			    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 			    driver.get(url);
+			   
 			    
 	}
 	@When("user logs in through valid username and password  {string} and {string}")
 	public void user_logs_in_through_valid_username_and_password_and(String username, String password) {
 		driver.findElement(By.xpath("//input[@placeholder='Username']")).sendKeys(username);
 		   driver.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys(password);
-		   driver.findElement(By.xpath("//button[@type='submit']")).click();
+		   driver.findElement(By.xpath("//button[@type='submit']"))
+		   .click();
+		   System.out.println("login with valid credentials");
 	}
 	@Then("login must be succesful.  {string}")
 	public void login_must_be_succesful(String text) {
 		String login=driver.findElement(By.xpath("//h6[text()='Dashboard']")).getText();
 		Assert.assertEquals(login, text);
+		System.out.println("logged in");
 	}
 
 }
